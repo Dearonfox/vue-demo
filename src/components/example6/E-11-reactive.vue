@@ -7,24 +7,18 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+export default { name: 'E11Reactive' }
+</script>
 
-export default {
-  name: 'E11Reactive',
-  setup() {
-    const person = reactive({
-      name: 'John Doe',
-      age: 30
-    });
+<script setup>
+import { reactive } from 'vue'
 
-    const incrementAge = () => {
-      person.age++; // reactive는 바로 속성에 접근
-    };
+const person = reactive({
+  name: 'John Doe',
+  age: 30
+})
 
-    return {
-      person,
-      incrementAge
-    };
-  }
-};
+const incrementAge = () => {
+  person.age++ // reactive 객체는 바로 속성에 접근/갱신
+}
 </script>

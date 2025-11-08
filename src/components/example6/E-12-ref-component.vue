@@ -6,28 +6,20 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+export default { name: 'E12RefComponent' }
+</script>
 
-export default {
-  name: 'E12RefComponent',
-  setup() {
-    const inputField = ref(null); // DOM 요소에 대한 ref 선언
+<script setup>
+import { ref, onMounted } from 'vue'
 
-    const focusInput = () => {
-      inputField.value.focus(); // ref를 통해 DOM 요소에 접근
-    };
+const inputField = ref(null) // DOM 요소 ref
 
-    onMounted(() => {
-      console.log(inputField); // 컴포넌트가 마운트된 후, inputField에 접근 가능
-      if(inputField.value) {
-        inputField.value.focus();
-      }
-    });
+const focusInput = () => {
+  inputField.value && inputField.value.focus()
+}
 
-    return {
-      inputField,
-      focusInput
-    };
-  }
-};
+onMounted(() => {
+  console.log(inputField)
+  if (inputField.value) inputField.value.focus()
+})
 </script>
