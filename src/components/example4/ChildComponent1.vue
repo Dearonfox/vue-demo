@@ -1,28 +1,25 @@
-<!-- ChildComponent.vue -->
 <template>
-  <h3> Child 1 </h3>
   <div>
-    <p>{{ sharedMessage }}</p>
-  </div>
-
-  <h3> Child 2 </h3>
-  <div>
-    <ChildComponent2 />
+    <p>{{ message }}</p>
+    <button @click="onSend">Send Event (1)</button>
   </div>
 </template>
 
 <script>
-import ChildComponent2 from "@/components/example4/ChildComponent2.vue";
+import { defineComponent } from 'vue'
 
-export default {
-  components: {ChildComponent2},
-  inject: ['sharedMessage']
-};
+export default defineComponent({
+  name: 'ChildComponent1',
+  props: { message: { type: String, required: true } },
+  emits: ['custom-event'],
+  setup(props, { emit }) {
+    const onSend = () => emit('custom-event', 'Hello from child 1')
+    // 템플릿에서 message를 쓰려면 반환 필요
+    return { ...props, onSend }
+  }
+})
 </script>
 
-
 <style scoped>
-p {
-  color: red;
-}
+/* 필요시 스타일 */
 </style>
