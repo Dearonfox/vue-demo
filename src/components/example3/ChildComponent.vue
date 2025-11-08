@@ -1,13 +1,20 @@
-<!-- ChildComponent.vue -->
 <template>
   <div>
     <p>{{ message }}</p>
-    <button @click="$emit('custom-event', 'Hello from child')">Send Event</button>
+    <button @click="onSend">Send Event</button>
   </div>
 </template>
 
 <script>
-export default {
-  props: ['message']
-};
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ChildComponent',
+  props: { message: { type: String, required: true } },
+  emits: ['custom-event'],
+  setup(props, { emit }) {
+    const onSend = () => emit('custom-event', 'Hello from child')
+    return { onSend, ...props }
+  }
+})
 </script>
